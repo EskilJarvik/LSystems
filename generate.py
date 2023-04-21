@@ -1,7 +1,4 @@
-def generate_plant(generations):
-    import matplotlib.pyplot as plt
-    #Define axiom
-    axiom = "X"
+def generate_plant(axiom, rule_sets):
 
     #Define the rules
 
@@ -10,28 +7,18 @@ def generate_plant(generations):
 
     sentence = axiom
 
-    #Define the generation
-    def nextGeneration(sentence):
-        workingSentence = ""
+    #The next generation
+    workingSentence = ""
         
-        for c in sentence:
-            #if is F
-            if c == rule1[0]:             
-                workingSentence += rule1[1]  
+    for c in sentence:
+        #if is F
+        if c == rule1[0]:             
+            workingSentence += rule1[1]  
 
-            #if is X
-            if c == rule2[0]:             
-                workingSentence += rule2[1]  
-            
-        return workingSentence
-
-    #Length of the generation
-    x = 0
-    while x < generations:
-
-        workingSentence = nextGeneration(sentence)    
-        sentence = workingSentence
-        x += 1
+        #if is X
+        if c == rule2[0]:             
+            workingSentence += rule2[1]  
     
-    return sentence
+    return workingSentence
+
 print(generate_plant(3))
