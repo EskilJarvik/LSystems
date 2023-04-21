@@ -8,7 +8,23 @@ def draw_plant(plante):
 
     canvas = Canvas(width = displayWidth, height = displayHeight)
 
-    # Insert stjålet kode for å tegne her
+    string = plante.string 
+    x = 0
+    y = 0
+
+    movment = {
+        "F": [0,5],
+        "+": [4,1],
+        "-": [-4,1]
+    }
+
+    for c in string:
+        if c in movment:
+            move = movment[c]
+            x = move[0]
+            y = move[1]
+
+            
 
     if error:
         return False
