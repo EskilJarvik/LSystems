@@ -1,59 +1,68 @@
-def draw_plant(plante):
-    from ipycanvas import Canvas
-    import numpy as np 
+from ipycanvas import Canvas
+import numpy as np 
 
-    error = False
 
-    displayWidth  = 300
-    displayHeight = 300
+displayWidth  = 300
+displayHeight = 300
 
-    canvas = Canvas(width = displayWidth, height = displayHeight)
-    canvas.stroke_style = "black"
+canvas = Canvas(width = displayWidth, height = displayHeight)
+canvas.stroke_style = "black"
 
-    string = plante.string 
-    x = 0
-    y = 0
+#testing
+string = "FFFFFFFF[+FFFF[+FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]FFFF[-FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]+FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]FFFFFFFF[-FFFF[+FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]FFFF[-FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]+FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]+FFFF[+FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]FFFF[-FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]+FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X"
+x = displayWidth/2
+y = displayHeight
 
-    stack = []
 
-    movment = {
-        "F": [0,5],
-        "X": [0,5],
-    }
+angle = 90
+length = 10
 
-    angle = {
-        "+": 20,
-        "-": -20
-    }
+stack = []
 
-    for c in string:
-        if c in angle:
-            angle += int(angle[c])
+movment = {
+    "F": 0,
+    "X": 0,
+}
 
-        elif c in movment:
-            move = movment[c]
+direction = {
+    "+": 20,
+    "-": -20
+}
 
-            # calculate angle
-            toRad = 20 * (np.pi/180) 
-            opposite = np.sin(toRad) * 5
-            adjacent = (opposite**2 + 5**2)**0.5
+for c in string:
 
-            canvas.stroke_line(x, y, x+move[0], y+move[1])
-            x = move[0]
-            y = move[1]
+    # change direction of travel
+    if c in direction:
+        angle += int(direction[c])
 
-        elif c == "[":
-            goTo = stack(-1)
-            x = goTo[0]
-            y = goTo[1]
-            angle = goTo[2]
-            stack.pop()
+    # create line
+    elif c in movment:
+        move = movment[c]
 
-        elif c == "[":
-            stack.append([x,y, angle])
+        # calculate angle
+        toRad = int(angle) * (np.pi/180) 
 
-    if error:
-        return False
-    else:
-        print(plante.name, plante.age)
-        display(canvas)
+        #next x and y value
+        x2 = x - (int(length * np.cos(toRad)))
+        y2 = y - length * np.sin(toRad)
+
+        #draw line
+        canvas.stroke_line(x, y, x2, y2)
+
+        #change current pos
+        x =  x2
+        y = y2
+
+    #go back
+    elif c == "]":
+        goTo = stack[-1]
+        x = goTo[0]
+        y = goTo[1]
+        angle = goTo[2]
+        stack.pop()
+
+    #add pos to stack
+    elif c == "[":
+        stack.append([x,y, angle])
+
+display(canvas)

@@ -1,24 +1,19 @@
-def generate_plant(axiom, rule_sets):
-
-    #Define the rules
-
-    rule1 = ["F","FF"]
-    rule2 = ["X","F[+X]F[-X]+X"]
-
+def generate_plant(axiom, rules):
     sentence = axiom
 
     #The next generation
-    workingSentence = ""
+    finalSentence = ""
         
     for c in sentence:
         #if is F
-        if c == rule1[0]:             
-            workingSentence += rule1[1]  
+        if c in rules:             
+            finalSentence += rules[c]
 
         #if is X
-        if c == rule2[0]:             
-            workingSentence += rule2[1]  
-    
-    return workingSentence
+        elif c in rules:             
+            finalSentence += rules[c]  
 
-print(generate_plant(3))
+        else:
+            finalSentence += c
+    
+    return finalSentence
