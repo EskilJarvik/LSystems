@@ -1,31 +1,31 @@
 def generate_plant(generations):
     import matplotlib.pyplot as plt
     #Define axiom
-    axiom = "F"
+    axiom = "X"
 
     #Define the rules
 
-    rule1 = ["F","F+F-F-F+F"]
+    rule1 = ["F","FF"]
+    rule2 = ["X","F-[[X]+X]+F[+FX]-X"]
 
     sentence = axiom
-
-    #Defines
-    #F = Gå frem 5
-    # - = Snu 90 grader mot klokka
-    # + = Snu 90 grader med klokka
 
     #Define the generation
     def nextGeneration(sentence):
         workingSentence = ""
         
         for c in sentence:
-            #if is f
+            #if is F
             if c == rule1[0]:             
                 workingSentence += rule1[1]  
-            
-            return workingSentence
 
-    #Length of the generation, basically how long it runs
+            #if is X
+            if c == rule2[0]:             
+                workingSentence += rule2[1]  
+            
+        return workingSentence
+
+    #Length of the generation
     x = 0
     while x < generations:
 
