@@ -1,5 +1,6 @@
 def draw_plant(plante):
     from ipycanvas import Canvas
+    import numpy as np 
 
     error = False
 
@@ -33,6 +34,9 @@ def draw_plant(plante):
             move = movment[c]
 
             # calculate angle
+            toRad = 20 * (np.pi/180) 
+            opposite = np.sin(toRad) * 5
+            adjacent = (opposite**2 + 5**2)**0.5
 
             canvas.stroke_line(x, y, x+move[0], y+move[1])
             x = move[0]
