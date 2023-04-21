@@ -3,7 +3,7 @@ def generate_plant(axiom, rule_sets):
     #Define the rules
 
     rule1 = ["F","FF"]
-    rule2 = ["X","F-[[X]+X]+F[+FX]-X"]
+    rule2 = ["X","F[+X]F[-X]+X"]
 
     sentence = axiom
 
