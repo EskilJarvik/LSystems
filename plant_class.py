@@ -86,8 +86,3 @@ class plant:
             # Add pos to stack
             elif c == "[":
                 stack.append([x,y, angle])
-
-        ax.set_xlabel('x')
-        ax.set_ylabel('z')
-        ax.set_zlabel('y')
-        plt.show()
