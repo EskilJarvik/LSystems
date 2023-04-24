@@ -23,8 +23,6 @@ class plant:
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
 
-        lines = []
-
         # Starting point
         x = 5
         y = 5
@@ -38,7 +36,7 @@ class plant:
         # Dictionaries for chars
         movment = {
             "F": 0,
-        "X": 0,
+            "X": 0,
         }
 
         direction = {
