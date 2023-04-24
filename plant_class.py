@@ -5,12 +5,12 @@ class plant:
         self.string = string
 
     def grow(self, ruleset):
+        cur_string = self.string
         new_string = ""
-        error = False
-        
-        # Insert stjålet kode her
 
-        if error:
-            return False
-        else:
-            self.string = new_string
+        for c in cur_string:
+            if c in ruleset:
+                new_string += ruleset[c]
+
+        self.string = new_string
+        return self
