@@ -1,68 +1,70 @@
-from ipycanvas import Canvas
-import numpy as np 
+def draw(string):
+    import numpy as np 
 
+    lines = []
 
-displayWidth  = 300
-displayHeight = 300
+    # Starting point
+    x = 5
+    y = 5
 
-canvas = Canvas(width = displayWidth, height = displayHeight)
-canvas.stroke_style = "black"
+    # Starting angle
+    angle = 90
 
-#testing
-string = "FFFFFFFF[+FFFF[+FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]FFFF[-FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]+FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]FFFFFFFF[-FFFF[+FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]FFFF[-FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]+FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]+FFFF[+FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]FFFF[-FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X]+FF[+F[+X]F[-X]+X]FF[-F[+X]F[-X]+X]+F[+X]F[-X]+X"
-x = displayWidth/2
-y = displayHeight
+    # Drawing length 
+    length = 10
 
+    # Dictionaries for chars
+    movment = {
+        "F": 0,
+        "X": 0,
+    }
 
-angle = 90
-length = 10
+    direction = {
+        "+": 20,
+        "-": -20
+    }
 
-stack = []
+    # Stack for branching
+    stack = []
 
-movment = {
-    "F": 0,
-    "X": 0,
-}
+    for c in string:
 
-direction = {
-    "+": 20,
-    "-": -20
-}
+        # Change direction of travel
+        if c in direction:
+            angle += int(direction[c])
 
-for c in string:
+        # Create line
+        elif c in movment:
+            move = movment[c]
 
-    # change direction of travel
-    if c in direction:
-        angle += int(direction[c])
+            #  Angle to rad
+            toRad = int(angle) * (np.pi/180) 
 
-    # create line
-    elif c in movment:
-        move = movment[c]
+            # Next x and y value
+            x2 = x + (int(length * np.cos(toRad)))
+            y2 = y + length * np.sin(toRad)
 
-        # calculate angle
-        toRad = int(angle) * (np.pi/180) 
+            # Draw line
+            X = [x, x2]
+            Y = [y, y2]
+            Z = [0, 0]
 
-        #next x and y value
-        x2 = x - (int(length * np.cos(toRad)))
-        y2 = y - length * np.sin(toRad)
+            lines.append([X,Y,Z])
 
-        #draw line
-        canvas.stroke_line(x, y, x2, y2)
+            # Change current pos
+            x =  x2
+            y = y2
 
-        #change current pos
-        x =  x2
-        y = y2
+        # Go back
+        elif c == "]":
+            goTo = stack[-1]
+            x = goTo[0]
+            y = goTo[1]
+            angle = goTo[2]
+            stack.pop()
 
-    #go back
-    elif c == "]":
-        goTo = stack[-1]
-        x = goTo[0]
-        y = goTo[1]
-        angle = goTo[2]
-        stack.pop()
+        # Add pos to stack
+        elif c == "[":
+            stack.append([x,y, angle])
 
-    #add pos to stack
-    elif c == "[":
-        stack.append([x,y, angle])
-
-display(canvas)
+    return lines
