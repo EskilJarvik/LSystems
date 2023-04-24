@@ -1,8 +1,11 @@
 class plant:
-    def __init__ (self, name, age, string):
+    def __init__ (self, name, age, string, x, y, z):
         self.name = name
         self.age = age
         self.string = string
+        self.xPos = x
+        self.yPos = y
+        self.zPos = z
 
     def grow(self, ruleset):
         cur_string = self.string
@@ -24,8 +27,9 @@ class plant:
         ax = fig.add_subplot(111, projection='3d')
 
         # Starting point
-        x = 5
-        y = 5
+        x = self.xPos
+        y = self.yPos
+        z = self.zPos
 
         # Starting angle
         angle = 90
