@@ -9,8 +9,8 @@ def draw_plant(plante):
     canvas = Canvas(width = displayWidth, height = displayHeight)
 
     string = plante.string 
-    x = 0
-    y = 0
+    x1 = 0
+    y1 = 0
 
     movment = {
         "F": [0,5],
@@ -21,10 +21,13 @@ def draw_plant(plante):
     for c in string:
         if c in movment:
             move = movment[c]
-            x = move[0]
-            y = move[1]
+            x2 = x1 + move[0]
+            y2 = y1 + move[1]
 
-            
+            Canvas.stroke_line(x1, y1, x2, y2)
+
+            x1 = x2
+            y1 = y2
 
     if error:
         return False
