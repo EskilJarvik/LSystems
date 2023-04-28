@@ -34,7 +34,7 @@ plant_rulesets = [
 import matplotlib.pyplot as plt
 
 plant_type = int(input("What plant"))
-plants = [plant(plant_names[plant_type], 0, plant_axioms[plant_type])]
+plants = [plant(plant_names[plant_type], 0, plant_axioms[plant_type], 0, 0, 0)]
 
 gen = 0
 end_gen = 3
