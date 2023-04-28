@@ -1,8 +1,9 @@
 class plant:
-    def __init__ (self, name, age, string, x, y, z):
+    def __init__ (self, name, age, string, angle, x, y, z):
         self.name = name
         self.age = age
         self.string = string
+        self.angle = angle
         self.xPos = x
         self.yPos = y
         self.zPos = z
@@ -18,35 +19,27 @@ class plant:
         self.string = new_string
         return self
     
-    def draw(self):
+    def draw(self, ax):
         import matplotlib.pyplot as plt
         import numpy as np 
-
-        # Set up figure and 3D axes 
-        fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
 
         # Starting point
         x = self.xPos
         y = self.yPos
         z = self.zPos
 
+        # Angle for rolling or pitcting
+        angle = self.angle
+
         # Starting angle
-        angle = 90
+        rollAngle = 90
+        pitchAngle = 90
 
         # Drawing length 
         length = 10
 
-        # Dictionaries for chars
-        movment = {
-            "F": 0,
-            "X": 0,
-        }
-
-        direction = {
-            "+": 20,
-            "-": -20
-        }
+        # Arrays for chars
+        symbos = [["F", "X"], ["+", "-"], ["^", "&"]]
 
         # Stack for branching
         stack = []
@@ -54,39 +47,52 @@ class plant:
         for c in self.string:
 
             # Change direction of travel
-            if c in direction:
-                angle += int(direction[c])
+            if c in symbos[1]:
+                if c == symbos[1][0]:
+                    rollAngle += int(angle)
+                else:
+                    rollAngle -= int(angle)
+
+            elif c in symbos[2]:
+                if c == symbos[2][0]:
+                    pitchAngle += int(angle)
+                else:
+                    pitchAngle -= int(angle)
 
             # Create line
-            elif c in movment:
-                move = movment[c]
+            elif c in symbos[0]:
 
                 #  Angle to rad
-                toRad = int(angle) * (np.pi/180) 
+                rollAngleToRad = int(rollAngle) * (np.pi/180)
+                pitchAngleToRad = int(pitchAngle) * (np.pi/180) 
 
                 # Next x and y value
-                x2 = x + (int(length * np.cos(toRad)))
-                y2 = y + length * np.sin(toRad)
+                x2 = x + int(length * np.cos(rollAngleToRad))
+                y2 = y + length * np.sin(rollAngleToRad)
+                z2 = z + int(length * np.cos(pitchAngleToRad))
 
                 # Draw line
                 X = [x, x2]
                 Y = [y, y2]
-                Z = [0, 0]
+                Z = [z, z2]
 
                 ax.plot(X, Z, Y)
 
                 # Change current pos
                 x =  x2
                 y = y2
+                z = z2
 
             # Go back
             elif c == "]":
                 goTo = stack[-1]
                 x = goTo[0]
                 y = goTo[1]
-                angle = goTo[2]
+                z = goTo[2]
+                rollAngle = goTo[3]
+                pitchAngle = goTo[4]
                 stack.pop()
 
             # Add pos to stack
             elif c == "[":
-                stack.append([x,y, angle])
+                stack.append([x, y, z, rollAngle, pitchAngle])
