@@ -1,17 +1,23 @@
-from draw import *
 from plant_class import *
 
 plant_names = [
+    "test",
     "wonk",
     "y"
 ]
 
 plant_axioms = [
+    "F",
     "a",
     "y"
 ]
 
 plant_rulesets = [
+    {
+        'F': "+F+",
+        '+': "FF-",
+        '-': "F+"
+    },
     {
         'F': ">F<",
         'a': "F[+x]Fb",
@@ -25,14 +31,18 @@ plant_rulesets = [
     }
 ]
 
+import matplotlib.pyplot as plt
+
 plant_type = int(input("What plant"))
-plant = plants(plant_names[plant_type], 0, plant_axioms[plant_type]) 
+plants = [plant(plant_names[plant_type], 0, plant_axioms[plant_type])]
 
-time = 0
-end_time = 3
+gen = 0
+end_gen = 3
 
-while time < end_time:
-    plant.grow(plant_rulesets[plant_type])
-    time = round(time + 0.1)
-
-plant.draw()
+while gen < end_gen:
+    for i in range(len(plants)):
+        index = plant_names.index(plants[i].name)
+        plants[i].grow(plant_rulesets[index])
+    gen += 1
+plants[0].draw()
+plt.show()
