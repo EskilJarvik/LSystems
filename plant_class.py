@@ -1,4 +1,4 @@
-class plant:
+class plants:
     def __init__ (self, name, age, string):
         self.name = name
         self.age = age

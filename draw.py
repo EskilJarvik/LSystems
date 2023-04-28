@@ -68,3 +68,5 @@ def draw(string):
             stack.append([x,y, angle])
 
     return lines
+
+draw("F+-+FF")
