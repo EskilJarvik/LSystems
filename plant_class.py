@@ -85,12 +85,12 @@ class plant:
 
             # Go back
             elif c == "]":
-                goTo = stack[-1]
-                x = goTo[0]
-                y = goTo[1]
-                z = goTo[2]
-                rollAngle = goTo[3]
-                pitchAngle = goTo[4]
+                newPos = stack[-1]
+                x = newPos[0]
+                y = newPos[1]
+                z = newPos[2]
+                rollAngle = newPos[3]
+                pitchAngle = newPos[4]
                 stack.pop()
 
             # Add pos to stack
