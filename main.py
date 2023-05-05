@@ -24,8 +24,8 @@ plant_rulesets = [
         'y': "b"
     },
     {
-        '1': "11",
-        'Y': "100"
+        '1': "FF",
+        '0': "1[0]0"
     }
 ]
 
@@ -35,7 +35,7 @@ plant_type = int(input("What plant"))
 plants = [plant(plant_names[plant_type], 0, plant_axioms[plant_type], 20, 0, 0, 0)]
 
 gen = 0
-end_gen = 5
+end_gen = 3
 
 while gen < end_gen:
     for i in range(len(plants)):

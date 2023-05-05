@@ -98,3 +98,8 @@ class plant:
             # Add pos to stack
             elif c == "[":
                 stack.append([x, y, z, rollAngle, pitchAngle])
+
+            elif c == "0":
+
+
+            elif c == "1":
