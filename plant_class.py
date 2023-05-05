@@ -15,6 +15,8 @@ class plant:
         for c in cur_string:
             if c in ruleset:
                 new_string += ruleset[c]
+            else:
+                new_string += c
 
         self.string = new_string
         return self
