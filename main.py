@@ -3,20 +3,18 @@ from plant_class import *
 plant_names = [
     "test",
     "wonk",
-    "y"
+    "fractal"
 ]
 
 plant_axioms = [
     "F",
     "a",
-    "y"
+    "0"
 ]
 
 plant_rulesets = [
     {
-        'F': "+F+",
-        '+': "FF-",
-        '-': "F+"
+        'F': "FF+[+F-F-F]-[-F+F+F]"
     },
     {
         'F': ">F<",
@@ -26,8 +24,8 @@ plant_rulesets = [
         'y': "b"
     },
     {
-        'X': "X[-FFF][+FFF]FX",
-        'Y': "YFX[+Y][-Y]"
+        '1': "11",
+        'Y': "100"
     }
 ]
 
@@ -37,7 +35,7 @@ plant_type = int(input("What plant"))
 plants = [plant(plant_names[plant_type], 0, plant_axioms[plant_type], 20, 0, 0, 0)]
 
 gen = 0
-end_gen = 3
+end_gen = 5
 
 while gen < end_gen:
     for i in range(len(plants)):
