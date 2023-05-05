@@ -1,5 +1,5 @@
 class plant:
-    def __init__ (self, name, age, string, angle, x, y, z):
+    def __init__ (self, name, age, string, angle, x, y, z, water):
         self.name = name
         self.age = age
         self.string = string
@@ -7,6 +7,7 @@ class plant:
         self.xPos = x
         self.yPos = y
         self.zPos = z
+        self.water = water
 
     def grow(self, ruleset):
         cur_string = self.string

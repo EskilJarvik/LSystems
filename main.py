@@ -14,7 +14,7 @@ plant_axioms = [
 
 plant_rulesets = [
     {
-        'F': "FF+[+F-F-F]-[-F+F+F]"
+        'F': "F[&+F]F[^+F][-^F][&F]"
     },
     {
         'F': ">F<",
@@ -32,7 +32,7 @@ plant_rulesets = [
 import matplotlib.pyplot as plt
 
 plant_type = int(input("Plant type: "))
-plants = [plant(plant_names[plant_type], 0, plant_axioms[plant_type], 20, 0, 0, 0)]
+plants = [plant(plant_names[plant_type], 0, plant_axioms[plant_type], 28, 0, 0, 0, 100)]
 
 gen = 0
 end_gen = int(input("Generations: "))
