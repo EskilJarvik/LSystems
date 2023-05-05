@@ -1,5 +1,5 @@
 class plant:
-    def __init__ (self, name, age, string, angle, x, y, z):
+    def __init__ (self, name, age, string, angle, x, y, z, water):
         self.name = name
         self.age = age
         self.string = string
@@ -7,6 +7,7 @@ class plant:
         self.xPos = x
         self.yPos = y
         self.zPos = z
+        self.water = water
 
     def grow(self, ruleset):
         cur_string = self.string
@@ -78,7 +79,7 @@ class plant:
                 Y = [y, y2]
                 Z = [z, z2]
 
-                ax.plot(X, Z, Y)
+                ax.plot(X, Z, Y, color ='black')
 
                 # Change current pos
                 x =  x2
