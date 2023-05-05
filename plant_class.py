@@ -76,7 +76,7 @@ class plant:
                 Y = [y, y2]
                 Z = [z, z2]
 
-                ax.plot(X, Z, Y)
+                ax.plot(X, Z, Y, color ='black')
 
                 # Change current pos
                 x =  x2
