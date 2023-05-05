@@ -14,9 +14,7 @@ plant_axioms = [
 
 plant_rulesets = [
     {
-        'F': "+F+",
-        '+': "FF-",
-        '-': "F+"
+        'F': "FF+[+F-F-F]-[-F+F+F]"
     },
     {
         'F': ">F<",
