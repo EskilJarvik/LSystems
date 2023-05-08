@@ -1,7 +1,7 @@
 from plant_class import *
 
 plants = [
-    plant("test", 0, "F", 90, 0, 0, 0, 100),
+    plant("test", 0, "F", 22.5, 0, 0, 0, 100),
     plant("wonk", 0, "a", 90, 0, 0, 0, 100),
     plant("fractal", 0, "0", 90, 0, 0, 0, 100)
 ]
@@ -34,3 +34,4 @@ for i in range(end_gen):
     plants[plant_index].grow(rulesets[plant_index])
     if ( i > start_gen ):
         plants[plant_index].draw()
+plt.show()
