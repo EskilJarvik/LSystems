@@ -1,18 +1,12 @@
 from plant_class import *
 
-plant_names = [
-    "test",
-    "wonk",
-    "fractal"
+plants = [
+    plant("test", 0, "F", 90, 0, 0, 0, 100),
+    plant("wonk", 0, "a", 90, 0, 0, 0, 100),
+    plant("fractal", 0, "0", 90, 0, 0, 0, 100)
 ]
 
-plant_axioms = [
-    "F",
-    "a",
-    "X"
-]
-
-plant_rulesets = [
+rulesets = [
     {
         'F': "F[&+F]F[^+F][-^F][&F]"
     },
@@ -31,28 +25,12 @@ plant_rulesets = [
 
 import matplotlib.pyplot as plt
 
-plant_type = int(input("Plant type: "))
-#                                                                 vinkel, x, y, z, antall vann
-plants = [plant(plant_names[plant_type], 0, plant_axioms[plant_type], 45, 0, 0, 0, 100)]
 
-gen = 0
-end_gen = int(input("Generations: "))
+plant_index = int(input("Plant index: "))
+start_gen = int(input("Start generation: "))
+end_gen = int(input("End generation: "))
 
-while gen < end_gen:
-    for i in range(len(plants)):
-        index = plant_names.index(plants[i].name)
-        plants[i].grow(plant_rulesets[index])
-    gen += 1
-
-# Set up figure and 3D axes 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-
-ax.set_box_aspect(aspect=(1, 1, 1))
-
-ax.set_xlabel('X')
-ax.set_ylabel('Z')
-ax.set_zlabel('Y')
-
-plants[0].draw(ax)
-plt.show()
+for i in range(end_gen):
+    plants[plant_index].grow(rulesets[plant_index])
+    if ( i > start_gen ):
+        plants[plant_index].draw()

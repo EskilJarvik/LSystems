@@ -22,9 +22,19 @@ class plant:
         self.string = new_string
         return self
     
-    def draw(self, ax):
+    def draw(self):
         import matplotlib.pyplot as plt
         import numpy as np 
+
+        # Set up figure and 3D axes 
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+
+        ax.set_box_aspect(aspect=(1, 1, 1))
+
+        ax.set_xlabel('X')
+        ax.set_ylabel('Z')
+        ax.set_zlabel('Y')
 
         # Starting point
         x = self.xPos
@@ -88,13 +98,12 @@ class plant:
 
             # Go back
             elif c == "]":
-                newPos = stack[-1]
+                newPos = stack.pop()
                 x = newPos[0]
                 y = newPos[1]
                 z = newPos[2]
                 rollAngle = newPos[3]
                 pitchAngle = newPos[4]
-                stack.pop()
 
             # Add pos to stack
             elif c == "[":
