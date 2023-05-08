@@ -30,6 +30,6 @@ end_gen = int(input("End generation: "))
 
 for i in range(end_gen):
     plants[plant_index].grow(rulesets[plant_index])
-    if ( i >= start_gen ):
+    if ( i >= start_gen - 1 ):
         plants[plant_index].draw()
 plt.show()
