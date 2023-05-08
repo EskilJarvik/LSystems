@@ -88,19 +88,13 @@ class plant:
 
             # Go back
             elif c == "]":
-                newPos = stack[-1]
+                newPos = stack.pop()
                 x = newPos[0]
                 y = newPos[1]
                 z = newPos[2]
                 rollAngle = newPos[3]
                 pitchAngle = newPos[4]
-                stack.pop()
 
             # Add pos to stack
             elif c == "[":
                 stack.append([x, y, z, rollAngle, pitchAngle])
-
-            elif c == "0":
-
-
-            elif c == "1":
