@@ -9,7 +9,7 @@ plant_names = [
 plant_axioms = [
     "F",
     "a",
-    "0"
+    "X"
 ]
 
 plant_rulesets = [
@@ -24,15 +24,16 @@ plant_rulesets = [
         'y': "b"
     },
     {
-        '1': "FF",
-        '0': "1[0]0"
+        'F': "FF",
+        'X': "F-X+X"
     }
 ]
 
 import matplotlib.pyplot as plt
 
 plant_type = int(input("Plant type: "))
-plants = [plant(plant_names[plant_type], 0, plant_axioms[plant_type], 28, 0, 0, 0, 100)]
+#                                                                 vinkel, x, y, z, antall vann
+plants = [plant(plant_names[plant_type], 0, plant_axioms[plant_type], 45, 0, 0, 0, 100)]
 
 gen = 0
 end_gen = int(input("Generations: "))
