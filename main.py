@@ -1,6 +1,7 @@
+import matplotlib.pyplot as plt
 from plant_class import *
 
-plants = [
+plants = [ #navn,age,axiom,vinkel, x,y,z, water %
     plant("test", 0, "F", 90, 0, 0, 0, 100),
     plant("wonk", 0, "a", 90, 0, 0, 0, 100),
     plant("fractal", 0, "0", 90, 0, 0, 0, 100)
@@ -22,9 +23,6 @@ rulesets = [
         'X': "F-X+X"
     }
 ]
-
-import matplotlib.pyplot as plt
-
 
 plant_index = int(input("Plant index: "))
 start_gen = int(input("Start generation: "))
