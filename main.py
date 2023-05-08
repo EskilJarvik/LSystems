@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 from plant_class import *
 
 plants = [
@@ -18,13 +19,10 @@ rulesets = [
         'y': "b"
     },
     {
-        '1': "FF",
-        '0': "1[0]0"
+        'F': "FF",
+        'X': "F-X+X"
     }
 ]
-
-import matplotlib.pyplot as plt
-
 
 plant_index = int(input("Plant index: "))
 start_gen = int(input("Start generation: "))
