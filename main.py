@@ -5,7 +5,7 @@ plants = [
     plant("test", 0, "F", 22.5, 0, 0, 0, 100),
     plant("wonk", 0, "a", 90, 0, 0, 0, 100),
     plant("fractal", 0, "0", 90, 0, 0, 0, 100),
-    plant("fuck_yeah",0 , "X", 25, 0, 0, 0, 100)
+    plant("plant",0 , "X", 25, 0, 0, 0, 100)
 ]
 
 rulesets = [
