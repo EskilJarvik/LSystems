@@ -33,9 +33,18 @@ rulesets = [
 plant_index = int(input("Plant index: "))
 start_gen = int(input("Start generation: "))
 end_gen = int(input("End generation: "))
+ 
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+ax.set_box_aspect(aspect=(1, 1, 1))
+
+ax.set_xlabel('X')
+ax.set_ylabel('Z')
+ax.set_zlabel('Y')
 
 for i in range(end_gen):
     plants[plant_index].grow(rulesets[plant_index])
     if ( i >= start_gen - 1 ):
-        plants[plant_index].draw()
+        plants[plant_index].draw(ax)
 plt.show()

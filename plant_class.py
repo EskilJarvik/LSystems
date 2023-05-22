@@ -22,19 +22,9 @@ class plant:
         self.string = new_string
         return self
     
-    def draw(self):
+    def draw(self, ax):
         import matplotlib.pyplot as plt
         import numpy as np 
-
-        # Set up figure and 3D axes 
-        fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
-
-        ax.set_box_aspect(aspect=(1, 1, 1))
-
-        ax.set_xlabel('X')
-        ax.set_ylabel('Z')
-        ax.set_zlabel('Y')
 
         # Starting point
         x = self.xPos
