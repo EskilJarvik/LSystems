@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from plant_class import *
 
 plants = [
-    plant("test", 0, "F", 22.5, 0, 0, 0, 100),
+    plant("test", 0, "(1,0)F", 22.5, 0, 0, 0, 100),
     plant("wonk", 0, "a", 90, 0, 0, 0, 100),
     plant("fractal", 0, "0", 90, 0, 0, 0, 100),
     plant("plant",0 , "X", 25, 0, 0, 0, 100)
@@ -10,7 +10,7 @@ plants = [
 
 rulesets = [
     {
-        'F': "F[&+F]F[^+F][-^F][&F]"
+        'F': "F[(1,0.&+)F][(1,0.^+)F][(1,0.-^)F][(1,0.&)F]"
     },
     {
         'F': ">F<",
@@ -38,6 +38,10 @@ fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
 ax.set_box_aspect(aspect=(1, 1, 1))
+
+ax.set_xlim(-25,25)
+ax.set_ylim(-25,25)
+ax.set_zlim(0,50)
 
 ax.set_xlabel('X')
 ax.set_ylabel('Z')
