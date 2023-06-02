@@ -10,31 +10,40 @@ class plant:
         self.water = water
 
     def grow(self, ruleset):
+        import random
         cur_string = self.string
         new_string = ""
+        i = 0
 
-        for c in cur_string:
-            if c in ruleset:
-                new_string += ruleset[c]
+        while i < len(cur_string):
+            if cur_string[i] in ruleset:
+                new_string += ruleset[cur_string[i]]
+                i += 1
+            elif cur_string[i] == "(":
+                i += 1
+                characteristics = ""
+                while cur_string[i] != "." and cur_string[i] != ")":
+                    characteristics += cur_string[i]
+                    i += 1
+                characteristics = characteristics.split(",")
+                randomAddedLength = int(characteristics[0]) + random.randint(1,3)
+                new_string += f"({randomAddedLength},{characteristics[1]}"
+                while cur_string[i] != ")":
+                    new_string += cur_string[i]
+                    i += 1
+                new_string += cur_string[i]
+                i += 1
             else:
-                new_string += c
-
+                new_string += cur_string[i]
+                i += 1
+        
         self.string = new_string
+        self.age += 1
         return self
     
-    def draw(self):
+    def draw(self, ax):
         import matplotlib.pyplot as plt
         import numpy as np 
-
-        # Set up figure and 3D axes 
-        fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
-
-        ax.set_box_aspect(aspect=(1, 1, 1))
-
-        ax.set_xlabel('X')
-        ax.set_ylabel('Z')
-        ax.set_zlabel('Y')
 
         # Starting point
         x = self.xPos
@@ -48,9 +57,6 @@ class plant:
         rollAngle = 90
         pitchAngle = 90
 
-        # Drawing length 
-        length = 10
-
         # Arrays for chars
         symbos = [["F", "X"], ["+", "-"], ["^", "&"]]
 
@@ -58,6 +64,8 @@ class plant:
         stack = []
 
         for c in self.string:
+
+            length = 10
 
             # Change direction of travel
             if c in symbos[1]:
