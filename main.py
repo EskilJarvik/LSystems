@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from plant_class import *
 
 plants = [
-    plant("test", 0, "(1,0)F", 22.5, 0, 0, 0, 100),
+    plant("test", 0, "(1,0,)F", 22.5, 0, 0, 0, 100),
     plant("wonk", 0, "a", 90, 0, 0, 0, 100),
     plant("fractal", 0, "0", 90, 0, 0, 0, 100),
     plant("plant",0 , "X", 25, 0, 0, 0, 100),
