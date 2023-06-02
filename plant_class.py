@@ -54,6 +54,7 @@ class plant:
         pitchAngle = 90
 
         # Arrays for chars
+        # F = Forward, X = Forward, + = right, - = left, ^ = Fram og tilbake, & = bak
         symbos = [["F", "X"], ["+", "-"], ["^", "&"]]
 
         # Stack for branching
