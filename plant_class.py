@@ -22,16 +22,12 @@ class plant:
             elif cur_string[i] == "(":
                 i += 1
                 characteristics = ""
-                while cur_string[i] != "." and cur_string[i] != ")":
+                while cur_string[i] != ")":
                     characteristics += cur_string[i]
                     i += 1
                 characteristics = characteristics.split(",")
                 randomAddedLength = int(characteristics[0]) + random.randint(1,3)
-                new_string += f"({randomAddedLength},{characteristics[1]}"
-                while cur_string[i] != ")":
-                    new_string += cur_string[i]
-                    i += 1
-                new_string += cur_string[i]
+                new_string += f"({randomAddedLength},{characteristics[1]},{characteristics[2]})"
                 i += 1
             else:
                 new_string += cur_string[i]
