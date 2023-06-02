@@ -5,7 +5,11 @@ plants = [
     plant("test", 0, "(1,0)F", 22.5, 0, 0, 0, 100),
     plant("wonk", 0, "a", 90, 0, 0, 0, 100),
     plant("fractal", 0, "0", 90, 0, 0, 0, 100),
-    plant("plant",0 , "X", 25, 0, 0, 0, 100)
+    plant("plant",0 , "X", 25, 0, 0, 0, 100),
+    plant("amogus",      0, "X", 180, 0, 0, 0, 100),
+    plant("love",        0, "F", 90, 0, 0, 0, 100),
+    plant("Trekant",     0, "F", 120, 0, 0, 0, 100)
+
 ]
 
 rulesets = [
@@ -21,11 +25,18 @@ rulesets = [
     },
     {
         'F': "FF",
-        'X': "F-X+X"
+        'X': "F[+X]-X"
     },
     {
-        'X' : "F+[[X]-X]-F[-FX]+X",
-        'F' : "FF"
+        'A': "FXF",
+        'B': "XXX"
+    },
+    {
+        'F': "F+F-F-F+F",
+    },
+    {
+        'F': "F-X+F+X-F",
+        'X': "XX"
     }
 ]
 
