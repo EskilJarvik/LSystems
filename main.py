@@ -3,7 +3,7 @@ from plant_class import *
 
 plants = [
     #     name,     age,   string,    angle,  x, y, z,  water
-    plant("test",    0,   "(10,0,)F",  22.5,   0, 0, 0,  100), #0
+    plant("test",    0,   "(10,0)F",  22.5,   0, 0, 0,  100), #0
     plant("wonk",    0,   "a",        90,     0, 0, 0,  100), #1
     plant("fractal", 0,   "0",        90,     0, 0, 0,  100), #2
     plant("plant",   0 ,  "X",        25,     0, 0, 0,  100), #3
@@ -14,8 +14,7 @@ plants = [
 
 rulesets = [
     {
-        ##'F': "F[(10,0,&+)F][(10,0,^+)F][(10,0,-^)F][(10,0,&)F]"
-        'F': "F"
+        'F': "X[(10,0,&+)F][(10,0,^+)F][(10,0,-^)F][(10,0,&)F]"
     },
     {
         'F': ">F<",
@@ -48,6 +47,10 @@ rulesets = [
 plant_index = int(input("Plant index: "))
 start_gen = int(input("Start generation: "))
 end_gen = int(input("End generation: "))
+generations = end_gen*12
+
+waterIntake = [150,150,600,600,600,1150,1150,1150,250,250,250,150]
+#waterIntake = [380-760,760-1520,120-380,95-190]
  
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
@@ -62,8 +65,11 @@ ax.set_xlabel('X')
 ax.set_ylabel('Z')
 ax.set_zlabel('Y')
 
-for i in range(1, 1 + end_gen*12):
-    plants[plant_index].grow(rulesets[plant_index],i-12*((i-1)//12))
-    if ( i >= start_gen - 1 ):
+
+for i in range(1, 1 + generations):
+    month = i-12*((i-1)//12)
+    plants[plant_index].water = waterIntake[month-1]
+    plants[plant_index].grow(rulesets[plant_index],month)
+    if ( i >= generations ):
         plants[plant_index].draw(ax)
 plt.show()

@@ -16,7 +16,7 @@ class plant:
         i = 0
 
         while i < len(cur_string):
-            if cur_string[i] in ruleset:
+            if cur_string[i] in ruleset and month in [4,5] :
                 new_string += ruleset[cur_string[i]]
                 i += 1
             elif cur_string[i] == "(":
@@ -28,7 +28,10 @@ class plant:
                 characteristics = characteristics.split(",")
                 randomAddedLength = float(characteristics[0]) + ( random.randint(1,3) / 10 )
                 randomAddedAngle = float(characteristics[1]) + ( random.randint(-2,2) / 10 )
-                new_string += f"({randomAddedLength},{randomAddedAngle},{characteristics[2]})"
+                if len(characteristics) == 3:
+                    new_string += f"({randomAddedLength},{randomAddedAngle},{characteristics[2]})"
+                else:
+                    new_string += f"({randomAddedLength},{randomAddedAngle})"
                 i += 1
             else:
                 new_string += cur_string[i]
@@ -73,21 +76,22 @@ class plant:
                 length = float(characteristics[0])
                 angle = self.angle + float(characteristics[1])
                 
-                for c in characteristics[2]:
-                    if c == "+" or c == "-":
-                        if c == "+":
-                            rollAngle += float(angle)
-                        else:
-                            rollAngle -= float(angle)
+                if len(characteristics) == 3:
+                    for c in characteristics[2]:
+                        if c == "+" or c == "-":
+                            if c == "+":
+                                rollAngle += float(angle)
+                            else:
+                                rollAngle -= float(angle)
 
-                    elif c == "^" or c == "&":
-                        if c == "^":
-                            pitchAngle += float(angle)
-                        else:
-                            pitchAngle -= float(angle)
-
+                        elif c == "^" or c == "&":
+                            if c == "^":
+                                pitchAngle += float(angle)
+                            else:
+                                pitchAngle -= float(angle)
+                                
             # Create line
-            elif c == "F":
+            elif c == "F" or c == "X":
 
                 #  Angle to rad
                 rollAngleToRad = float(rollAngle) * (np.pi/180)
@@ -102,8 +106,12 @@ class plant:
                 X = [x, x2]
                 Y = [y, y2]
                 Z = [z, z2]
-
-                ax.plot(X, Z, Y, color ='black')
+                
+                if c == "F":
+                    ax.scatter(x, z, y, c="green")
+                else: 
+                    ax.plot(X, Z, Y, c='#8B4513',linewidth=2)
+                    #ax.plot(X, Z, Y, c='#8B4513', linewidth=(length-10)*8)
 
                 # Change current pos
                 x =  x2
