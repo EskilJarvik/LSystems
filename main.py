@@ -3,7 +3,7 @@ from plant_class import *
 
 plants = [
     #     name,     age,   string,    angle,  x, y, z,  water
-    plant("test",    0,   "(1,0,)F",  22.5,   0, 0, 0,  100), #0
+    plant("test",    0,   "(10,0,)F",  22.5,   0, 0, 0,  100), #0
     plant("wonk",    0,   "a",        90,     0, 0, 0,  100), #1
     plant("fractal", 0,   "0",        90,     0, 0, 0,  100), #2
     plant("plant",   0 ,  "X",        25,     0, 0, 0,  100), #3
@@ -14,7 +14,7 @@ plants = [
 
 rulesets = [
     {
-        'F': "F[(1,0,&+)F][(1,0,^+)F][(1,0,-^)F][(1,0,&)F]"
+        'F': "F[(10,0,&+)F][(10,0,^+)F][(10,0,-^)F][(10,0,&)F]"
     },
     {
         'F': ">F<",

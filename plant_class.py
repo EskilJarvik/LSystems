@@ -26,8 +26,8 @@ class plant:
                     characteristics += cur_string[i]
                     i += 1
                 characteristics = characteristics.split(",")
-                randomAddedLength = int(characteristics[0]) + random.randint(1,3)
-                randomAddedAngle = int(characteristics[1]) + random.randint(1,3)
+                randomAddedLength = float(characteristics[0]) + ( random.randint(1,3) / 10 )
+                randomAddedAngle = float(characteristics[1]) + ( random.randint(-2,2) / 10 )
                 new_string += f"({randomAddedLength},{randomAddedAngle},{characteristics[2]})"
                 i += 1
             else:
@@ -54,52 +54,45 @@ class plant:
         rollAngle = 90
         pitchAngle = 90
 
-        # Arrays for chars
-        # F = Forward, X = Forward, + = right, - = left, ^ = Fram og tilbake, & = bak
-        symbos = [["F", "X"], ["+", "-"], ["^", "&"]]
-
         # Stack for branching
         stack = []
 
-        i = 0
         length = 10
+        i = 0
 
         while i < len(self.string):
-            char = self.string[i]
+            c = self.string[i]
 
-            if char[i] == "(":
+            if c == "(":
                 i += 1
                 characteristics = ""
-                print(char[i])
-                while char[i] != ")":
-                    characteristics += char[i]
+                while self.string[i] != ")":
+                    characteristics += self.string[i]
                     i += 1
                 print(characteristics)
                 characteristics = characteristics.split(",")
-                length += characteristics[0]
-                angle += characteristics[1]
+                length = float(characteristics[0])
+                angle = self.angle + float(characteristics[1])
                 
                 for c in characteristics[2]:
-                    # Change direction of travel
                     if c == "+" or c == "-":
                         if c == "+":
-                            rollAngle += int(angle)
+                            rollAngle += float(angle)
                         else:
-                            rollAngle -= int(angle)
+                            rollAngle -= float(angle)
 
                     elif c == "^" or c == "&":
                         if c == "^":
-                            pitchAngle += int(angle)
+                            pitchAngle += float(angle)
                         else:
-                            pitchAngle -= int(angle)  
-                    i += 1
+                            pitchAngle -= float(angle)
 
             # Create line
-            elif char == "F":
+            elif c == "F":
 
                 #  Angle to rad
-                rollAngleToRad = int(rollAngle) * (np.pi/180)
-                pitchAngleToRad = int(pitchAngle) * (np.pi/180) 
+                rollAngleToRad = float(rollAngle) * (np.pi/180)
+                pitchAngleToRad = float(pitchAngle) * (np.pi/180) 
 
                 # Next x and y value
                 x2 = x + int(length * np.cos(rollAngleToRad))
@@ -121,19 +114,20 @@ class plant:
                 i += 1
 
             # Go back
-            elif char == "]":
+            elif c == "]":
                 newPos = stack.pop()
                 x = newPos[0]
                 y = newPos[1]
                 z = newPos[2]
                 rollAngle = newPos[3]
                 pitchAngle = newPos[4]
+                length = newPos[5]
                 i += 1
 
             # Add pos to stack
-            elif char == "[":
-                stack.append([x, y, z, rollAngle, pitchAngle])
+            elif c == "[":
+                stack.append([x, y, z, rollAngle, pitchAngle, length])
                 i += 1
 
-            else:
+            else: 
                 i += 1
