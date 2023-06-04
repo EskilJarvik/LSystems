@@ -9,7 +9,7 @@ class plant:
         self.zPos = z
         self.water = water
 
-    def grow(self, ruleset):
+    def grow(self, ruleset, month):
         import random
         cur_string = self.string
         new_string = ""
@@ -69,7 +69,6 @@ class plant:
                 while self.string[i] != ")":
                     characteristics += self.string[i]
                     i += 1
-                print(characteristics)
                 characteristics = characteristics.split(",")
                 length = float(characteristics[0])
                 angle = self.angle + float(characteristics[1])

@@ -14,7 +14,8 @@ plants = [
 
 rulesets = [
     {
-        'F': "F[(10,0,&+)F][(10,0,^+)F][(10,0,-^)F][(10,0,&)F]"
+        ##'F': "F[(10,0,&+)F][(10,0,^+)F][(10,0,-^)F][(10,0,&)F]"
+        'F': "F"
     },
     {
         'F': ">F<",
@@ -61,8 +62,8 @@ ax.set_xlabel('X')
 ax.set_ylabel('Z')
 ax.set_zlabel('Y')
 
-for i in range(end_gen):
-    plants[plant_index].grow(rulesets[plant_index])
+for i in range(1, 1 + end_gen*12):
+    plants[plant_index].grow(rulesets[plant_index],i-12*((i-1)//12))
     if ( i >= start_gen - 1 ):
         plants[plant_index].draw(ax)
 plt.show()
