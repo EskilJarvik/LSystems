@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import math
+import random
 
 from plant_class import *
 
@@ -56,6 +58,8 @@ plant_index = int(input("Plant index: "))
 end_gen = int(input("Draw gen: "))
 generations = end_gen*12
 
+offset = 50
+
 plant_array_side_length = math.ceil(number_of_plants**(1/2))
 plants = []
 for i in range(plant_array_side_length):
@@ -63,8 +67,8 @@ for i in range(plant_array_side_length):
     for j in range(plant_array_side_length):
         if ( i * plant_array_side_length + j < number_of_plants ):
             plant_row.append( copy_plant(plant_types[plant_index]) )
-            plant_row[j].xPos = (i - (i / 2)) * 100
-            plant_row[j].zPos = (j - (j / 2)) * 100
+            plant_row[j].xPos = (i - (i / 2)) * offset + random.randint(offset / -10, offset / 10)
+            plant_row[j].zPos = (j - (j / 2)) * offset + random.randint(offset / -10, offset / 10)
         else:
             break
     plants.append(plant_row)
