@@ -67,8 +67,8 @@ for i in range(plant_array_side_length):
     for j in range(plant_array_side_length):
         if ( i * plant_array_side_length + j < number_of_plants ):
             plant_row.append( copy_plant(plant_types[plant_index]) )
-            plant_row[j].xPos = (i - (i / 2)) * offset + random.randint(offset / -10, offset / 10)
-            plant_row[j].zPos = (j - (j / 2)) * offset + random.randint(offset / -10, offset / 10)
+            plant_row[j].xPos = (i - (plant_array_side_length / 2)) * ( offset + random.randint(offset / -10, offset / 10) )
+            plant_row[j].zPos = (j - (plant_array_side_length / 2)) * ( offset + random.randint(offset / -10, offset / 10) )
         else:
             break
     plants.append(plant_row)
