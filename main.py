@@ -1,9 +1,12 @@
 import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
 from plant_class import *
 
 plants = [
     #     name,     age,   string,    angle,  x, y, z,  water
-    plant("test",    0,   "(1,0,)F",  22.5,   0, 0, 0,  100), #0
+    plant("test",    0,   "(10,0)F",  22.5,   0, 0, 0,  100), #0
     plant("wonk",    0,   "a",        90,     0, 0, 0,  100), #1
     plant("fractal", 0,   "0",        90,     0, 0, 0,  100), #2
     plant("plant",   0 ,  "X",        25,     0, 0, 0,  100), #3
@@ -18,7 +21,7 @@ plants = [
 
 rulesets = [
     {
-        'F': "F[(1,0,&+)F][(1,0,^+)F][(1,0,-^)F][(1,0,&)F]"
+        'F': "X[(10,0,&+)F][(10,0,^+)F][(10,0,-^)F][(10,0,&)F]"
     },
     {
         'F': ">F<",
@@ -58,22 +61,28 @@ rulesets = [
 plant_index = int(input("Plant index: "))
 start_gen = int(input("Start generation: "))
 end_gen = int(input("End generation: "))
- 
+generations = end_gen*12
+
+waterIntake = [150,150,600,600,600,1150,1150,1150,250,250,250,150]
+
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
-ax.set_box_aspect(aspect=(1, 1, 1))
-
-ax.set_xlim(-25,25)
-ax.set_ylim(-25,25)
-ax.set_zlim(0,50)
-
-ax.set_xlabel('X')
-ax.set_ylabel('Z')
-ax.set_zlabel('Y')
-
-for i in range(end_gen):
-    plants[plant_index].grow(rulesets[plant_index])
-    if ( i >= start_gen - 1 ):
-        plants[plant_index].draw(ax)
+def update(frame):
+    i = frame
+    ax.cla()
+    ax.set_box_aspect(aspect=(1, 1, 1))
+    ax.set_xlim(-25, 25)
+    ax.set_ylim(-25, 25)
+    ax.set_zlim(0, 50)
+    ax.set_xlabel('X')
+    ax.set_ylabel('Z')
+    ax.set_zlabel('Y')
+    month = i-12*((i-1)//12)
+    plants[plant_index].water = waterIntake[month-1]
+    if month not in [12,1,2]:
+        plants[plant_index].grow(rulesets[plant_index],month)
+    plants[plant_index].draw(ax,month)
+    
+plantAnimation = animation.FuncAnimation(fig, update, frames=range(1, generations + 1), interval=1000, repeat=False)
 plt.show()
