@@ -11,12 +11,16 @@ class plant:
 
     def grow(self, ruleset, month):
         import random
+
         cur_string = self.string
         new_string = ""
         i = 0
+        
+        branch = cur_string.count("F") * 10 < self.water
 
         while i < len(cur_string):
-            if cur_string[i] in ruleset and month in [4,5] :
+            if cur_string[i] in ruleset and month in [4,5,6] and branch == True:
+                self.water -= 10
                 new_string += ruleset[cur_string[i]]
                 i += 1
             elif cur_string[i] == "(":
@@ -26,7 +30,7 @@ class plant:
                     characteristics += cur_string[i]
                     i += 1
                 characteristics = characteristics.split(",")
-                randomAddedLength = float(characteristics[0]) + ( random.randint(1,3) / 10 )
+                randomAddedLength = float(characteristics[0]) + ( random.randint(1,4) / 10 )
                 randomAddedAngle = float(characteristics[1]) + ( random.randint(-2,2) / 10 )
                 if len(characteristics) == 3:
                     new_string += f"({randomAddedLength},{randomAddedAngle},{characteristics[2]})"
@@ -38,10 +42,11 @@ class plant:
                 i += 1
         
         self.string = new_string
+        self.water -= 250
         self.age += 1
         return self
     
-    def draw(self, ax):
+    def draw(self, ax, month):
         import matplotlib.pyplot as plt
         import numpy as np 
 
@@ -108,7 +113,12 @@ class plant:
                 Z = [z, z2]
                 
                 if c == "F":
-                    ax.scatter(x, z, y, c="green")
+                    if month in [3,4,5]:
+                        ax.scatter(x, z, y, c="#04AF70")
+                    elif month in [6,7,8]:
+                        ax.scatter(x, z, y, c="green")
+                    elif month in [9,10, 11]:
+                        ax.scatter(x, z, y, c="orange")
                 else: 
                     ax.plot(X, Z, Y, c='#8B4513',linewidth=2)
                     #ax.plot(X, Z, Y, c='#8B4513', linewidth=(length-10)*8)

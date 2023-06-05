@@ -69,8 +69,9 @@ def update(frame):
     ax.set_zlabel('Y')
     month = i-12*((i-1)//12)
     plants[plant_index].water = waterIntake[month-1]
-    plants[plant_index].grow(rulesets[plant_index],month)
-    plants[plant_index].draw(ax)
+    if month not in [12,1,2]:
+        plants[plant_index].grow(rulesets[plant_index],month)
+    plants[plant_index].draw(ax,month)
     
 plantAnimation = animation.FuncAnimation(fig, update, frames=range(1, generations + 1), interval=1000, repeat=False)
 plt.show()
