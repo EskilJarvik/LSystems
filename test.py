@@ -92,7 +92,7 @@ def update(frame):
                 plants[j][k].water = waterIntake[month-1]
                 if month not in [12,1,2]:
                     plants[j][k].grow(rulesets[plant_index], month)
-    plants[j][k].draw(ax, month)
+                    plants[j][k].draw(ax, month)
     
 plantAnimation = animation.FuncAnimation(fig, update, frames=range(1, generations + 1), interval=1000, repeat=False)
 plt.show()
