@@ -62,6 +62,7 @@ offset = 50
 
 plant_array_side_length = math.ceil(number_of_plants**(1/2))
 plants = []
+t = 0
 for i in range(plant_array_side_length):
     plant_row = []
     for j in range(plant_array_side_length):
@@ -69,6 +70,10 @@ for i in range(plant_array_side_length):
             plant_row.append( copy_plant(plant_types[plant_index]) )
             plant_row[j].xPos = (i - (plant_array_side_length / 2)) * ( offset + random.randint(offset / -10, offset / 10) )
             plant_row[j].zPos = (j - (plant_array_side_length / 2)) * ( offset + random.randint(offset / -10, offset / 10) )
+            print(t)
+            print(plant_row[j].xPos)
+            print(plant_row[j].zPos)
+            t += 1
         else:
             break
     plants.append(plant_row)
