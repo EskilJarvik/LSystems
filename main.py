@@ -9,7 +9,11 @@ plants = [
     plant("plant",   0 ,  "X",        25,     0, 0, 0,  100), #3
     plant("amogus",  0,   "X",        180,    0, 0, 0,  100), #4
     plant("love",    0,   "F",        90,     0, 0, 0,  100), #5
-    plant("Trekant", 0,   "A",        60,     0, 0, 0,  100)  #6
+    plant("Trekant", 0,   "F",        60,     0, 0, 0,  100), #6
+    plant("Trekant2",0,   "F",        120,    0, 0, 0,  100), #7
+    plant("Labyrint",0,   "F+F+F+F",  90,     0, 0, 0,  100)  #8
+
+
 ]
 
 rulesets = [
@@ -39,8 +43,15 @@ rulesets = [
         'X': "XX"
     },
     {
+        'F': "X-F-X",
+        'X': "F+X+F"
+    },
+    {
         'F': "F-X+F+X-F",
         'X': "XX"
+    },
+    {
+        'F': "FF+F-F+F+FF",
     }
 ]
 
