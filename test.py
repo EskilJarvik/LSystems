@@ -78,13 +78,15 @@ waterIntake = [150,150,600,600,600,1150,1150,1150,250,250,250,150]
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
+axis_length = offset * plant_array_side_length
+
 def update(frame):
     i = frame
     ax.cla()
     ax.set_box_aspect(aspect=(1, 1, 1))
-    ax.set_xlim(-25, 25)
-    ax.set_ylim(-25, 25)
-    ax.set_zlim(0, 50)
+    ax.set_xlim(-axis_length, axis_length)
+    ax.set_ylim(-axis_length, axis_length)
+    ax.set_zlim(0, 2 * axis_length)
     ax.set_xlabel('X')
     ax.set_ylabel('Z')
     ax.set_zlabel('Y')
