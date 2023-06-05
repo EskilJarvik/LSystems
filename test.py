@@ -8,7 +8,7 @@ def copy_plant(plant_to_copy):
     copy = plant(plant_to_copy.name, plant_to_copy.age, plant_to_copy.string, plant_to_copy.angle, plant_to_copy.xPos, plant_to_copy.yPos, plant_to_copy.zPos, plant_to_copy.water)
     return copy
 
-plants = [
+plant_types = [
     #     name,     age,   string,    angle,  x, y, z,  water
     plant("test",    0,   "(10,0)F",  22.5,   0, 0, 0,  100), #0
     plant("wonk",    0,   "a",        90,     0, 0, 0,  100), #1
