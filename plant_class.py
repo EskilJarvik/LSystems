@@ -1,5 +1,6 @@
 class plant:
-    def __init__ (self, name, age, string, angle, x, y, z, water):
+    def __init__ (self, index, name, age, string, angle, x, y, z, water):
+        self.index = index
         self.name = name
         self.age = age
         self.string = string
@@ -19,7 +20,7 @@ class plant:
         branch = cur_string.count("F") * 10 < self.water
 
         while i < len(cur_string):
-            if cur_string[i] in ruleset and month in [4,5,6] and branch == True:
+            if cur_string[i] in ruleset and month in [4,6] and branch == True:
                 self.water -= 10
                 new_string += ruleset[cur_string[i]]
                 i += 1
@@ -30,7 +31,7 @@ class plant:
                     characteristics += cur_string[i]
                     i += 1
                 characteristics = characteristics.split(",")
-                randomAddedLength = float(characteristics[0]) + ( random.randint(1,4) / 10 )
+                randomAddedLength = float(characteristics[0]) + ( random.randint(1,3) / 10 )
                 randomAddedAngle = float(characteristics[1]) + ( random.randint(-2,2) / 10 )
                 if len(characteristics) == 3:
                     new_string += f"({randomAddedLength},{randomAddedAngle},{characteristics[2]})"
@@ -114,14 +115,16 @@ class plant:
                 
                 if c == "F":
                     if month in [3,4,5]:
-                        ax.scatter(x, z, y, c="#04AF70")
+                        ax.scatter3D(x, z, y, c = "#04AF70")  
+                        #ax.plot([x,x+0.5], [z,z+0.5], [y,y+0.5], c="#04AF70", linewidth=2)
                     elif month in [6,7,8]:
-                        ax.scatter(x, z, y, c="green")
+                        ax.scatter3D(x, z, y, c = "green")  
+                        #ax.plot([x,x+0.5], [z,z+0.5], [y,y+0.5], c="green", linewidth=2)
                     elif month in [9,10, 11]:
-                        ax.scatter(x, z, y, c="orange")
+                        ax.scatter3D(x, z, y, c = "orange")  
+                        #ax.plot([x,x+0.5], [z,z+0.5], [y,y+0.5], c="orange", linewidth=2)
                 else: 
                     ax.plot(X, Z, Y, c='#8B4513',linewidth=2)
-                    #ax.plot(X, Z, Y, c='#8B4513', linewidth=(length-10)*8)
 
                 # Change current pos
                 x =  x2
