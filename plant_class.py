@@ -20,30 +20,35 @@ class plant:
         branch = cur_string.count("F") * 10 < self.water
 
         while i < len(cur_string):
-            if cur_string[i] in ruleset and month in [4,6] and branch == True:
+            if (cur_string[i] in ruleset) and (month in [4,6]) and (branch == True):
                 self.water -= 10
                 new_string += ruleset[cur_string[i]]
                 i += 1
+                
             elif cur_string[i] == "(":
                 i += 1
                 characteristics = ""
+
                 while cur_string[i] != ")":
                     characteristics += cur_string[i]
                     i += 1
+
                 characteristics = characteristics.split(",")
                 randomAddedLength = float(characteristics[0]) + ( random.randint(1,3) / 10 )
                 randomAddedAngle = float(characteristics[1]) + ( random.randint(-2,2) / 10 )
+
                 if len(characteristics) == 3:
                     new_string += f"({randomAddedLength},{randomAddedAngle},{characteristics[2]})"
                 else:
                     new_string += f"({randomAddedLength},{randomAddedAngle})"
                 i += 1
+
             else:
                 new_string += cur_string[i]
                 i += 1
         
         self.string = new_string
-        self.water -= 250
+        self.water -= 500
         self.age += 1
         return self
     
@@ -51,19 +56,14 @@ class plant:
         import matplotlib.pyplot as plt
         import numpy as np 
 
-        # Starting point
         x = self.xPos
         y = self.yPos
         z = self.zPos
-
-        # Angle for rolling or pitcting
         angle = self.angle
 
-        # Starting angle
         rollAngle = 90
         pitchAngle = 90
 
-        # Stack for branching
         stack = []
 
         length = 10
@@ -75,9 +75,11 @@ class plant:
             if c == "(":
                 i += 1
                 characteristics = ""
+
                 while self.string[i] != ")":
                     characteristics += self.string[i]
                     i += 1
+
                 characteristics = characteristics.split(",")
                 length = float(characteristics[0])
                 angle = self.angle + float(characteristics[1])
@@ -96,19 +98,15 @@ class plant:
                             else:
                                 pitchAngle -= float(angle)
                                 
-            # Create line
             elif c == "F" or c == "X":
 
-                #  Angle to rad
                 rollAngleToRad = float(rollAngle) * (np.pi/180)
                 pitchAngleToRad = float(pitchAngle) * (np.pi/180) 
 
-                # Next x and y value
                 x2 = x + int(length * np.cos(rollAngleToRad))
                 y2 = y + length * np.sin(rollAngleToRad)
                 z2 = z + int(length * np.cos(pitchAngleToRad))
 
-                # Draw line
                 X = [x, x2]
                 Y = [y, y2]
                 Z = [z, z2]
@@ -116,24 +114,19 @@ class plant:
                 if c == "F":
                     if month in [3,4,5]:
                         ax.scatter3D(x, z, y, c = "#04AF70")  
-                        #ax.plot([x,x+0.5], [z,z+0.5], [y,y+0.5], c="#04AF70", linewidth=2)
                     elif month in [6,7,8]:
                         ax.scatter3D(x, z, y, c = "green")  
-                        #ax.plot([x,x+0.5], [z,z+0.5], [y,y+0.5], c="green", linewidth=2)
                     elif month in [9,10, 11]:
                         ax.scatter3D(x, z, y, c = "orange")  
-                        #ax.plot([x,x+0.5], [z,z+0.5], [y,y+0.5], c="orange", linewidth=2)
                 else: 
                     ax.plot(X, Z, Y, c='#8B4513',linewidth=2)
 
-                # Change current pos
                 x =  x2
                 y = y2
                 z = z2
 
                 i += 1
 
-            # Go back
             elif c == "]":
                 newPos = stack.pop()
                 x = newPos[0]
@@ -142,9 +135,9 @@ class plant:
                 rollAngle = newPos[3]
                 pitchAngle = newPos[4]
                 length = newPos[5]
+
                 i += 1
 
-            # Add pos to stack
             elif c == "[":
                 stack.append([x, y, z, rollAngle, pitchAngle, length])
                 i += 1
